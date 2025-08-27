@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>عمار الوزير | الإعدادات</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="toast-container"></div>
+
+    <header>
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-qrcode"></i>
+            </div>
+            <div class="logo-text">عمار الوزير</div>
+        </div>
+        <div class="user-info">
+            <div class="user-avatar" id="user-avatar">ع</div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- صفحة تسجيل الدخول -->
+        <div id="login-page" class="page" style="display: none;">
+            <h2 class="section-title"><i class="fas fa-user"></i>تسجيل الدخول</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">مرحباً بعودتك</div>
+                    <div class="card-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                </div>
+                
+                <div class="login-form">
+                    <div class="form-group">
+                        <label for="login-username">اسم المستخدم</label>
+                        <input type="text" id="login-username" class="form-control" placeholder="أدخل اسم المستخدم">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="login-password">كلمة المرور</label>
+                        <input type="password" id="login-password" class="form-control" placeholder="أدخل كلمة المرور">
+                    </div>
+                    
+                    <button class="btn btn-block" id="login-btn">
+                        <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                    </button>
+                    
+                    <div class="login-links">
+                        <a href="#" id="show-register">إنشاء حساب جديد</a>
+                        <a href="#" id="forgot-password">نسيت كلمة المرور؟</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- صفحة إنشاء حساب -->
+        <div id="register-page" class="page" style="display: none;">
+            <h2 class="section-title"><i class="fas fa-user-plus"></i>إنشاء حساب جديد</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">انضم إلينا</div>
+                    <div class="card-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                </div>
+                
+                <div class="register-form">
+                    <div class="form-group">
+                        <label for="register-name">الاسم الكامل</label>
+                        <input type="text" id="register-name" class="form-control" placeholder="أدخل اسمك الكامل">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-username">اسم المستخدم</label>
+                        <input type="text" id="register-username" class="form-control" placeholder="اختر اسم مستخدم">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-email">البريد الإلكتروني</label>
+                        <input type="email" id="register-email" class="form-control" placeholder="example@domain.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-password">كلمة المرور</label>
+                        <input type="password" id="register-password" class="form-control" placeholder="اختر كلمة مرور قوية">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-confirm-password">تأكيد كلمة المرور</label>
+                        <input type="password" id="register-confirm-password" class="form-control" placeholder="أعد إدخال كلمة المرور">
+                    </div>
+                    
+                    <button class="btn btn-block" id="register-btn">
+                        <i class="fas fa-user-plus"></i> إنشاء حساب
+                    </button>
+                    
+                    <div class="login-links">
+                        <a href="#" id="show-login">لديك حساب بالفعل؟ سجل الدخول</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- صفحة الإعدادات الرئيسية -->
+        <div id="settings-page" class="page">
+            <h2 class="section-title"><i class="fas fa-cog"></i>الإعدادات</h2>
+            
+            <div class="settings-list">
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-icon">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                        <div class="setting-text">
+                            <div class="setting-title">الوضع الداكن / الفاتح</div>
+                            <div class="setting-desc">تبديل بين وضع العرض</div>
+                        </div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="dark-mode-setting">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-icon">
+                            <i class="fas fa-vibrate"></i>
+                        </div>
+                        <div class="setting-text">
+                            <div class="setting-title">الاهتزاز عند المسح</div>
+                            <div class="setting-desc">تفعيل الاهتزاز عند مسح رمز ناجح</div>
+                        </div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="vibration-setting" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-icon">
+                            <i class="fas fa-external-link-alt"></i>
+                        </div>
+                        <div class="setting-text">
+                            <div class="setting-title">فتح المواقع تلقائيًا</div>
+                            <div class="setting-desc">فتح الروابط مباشرة بعد المسح</div>
+                        </div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="auto-open-setting" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <div class="setting-text">
+                            <div class="setting-title">حفظ التاريخ</div>
+                            <div class="setting-desc">تخزين سجل المسح والإنشاء</div>
+                        </div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="save-history-setting" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="setting-text">
+                            <div class="setting-title">نسخ احتياطي للبيانات</div>
+                            <div class="setting-desc">حفظ أو استعادة بياناتك</div>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-left setting-arrow"></i>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="setting-text">
+                            <div class="setting-title">خصوصية التطبيق</div>
+                            <div class="setting-desc">إعدادات الخصوصية والأذونات</div>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-left setting-arrow"></i>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <div class="setting-text">
+                            <div class="setting-title">المساعدة والدعم</div>
+                            <div class="setting-desc">الأسئلة الشائعة ودليل الاستخدام</div>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-left setting-arrow"></i>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-icon">
+                            <i class="fas fa-comment-dots"></i>
+                        </div>
+                        <div class="setting-text">
+                            <div class="setting-title">إرسال ملاحظات</div>
+                            <div class="setting-desc">شاركنا رأيك حول التطبيق</div>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-left setting-arrow"></i>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="setting-text">
+                            <div class="setting-title">عن التطبيق</div>
+                            <div class="setting-desc">إصدار التطبيق ومعلومات التقنية</div>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-left setting-arrow"></i>
+                </div>
+                
+                <div class="setting-item" id="logout-btn" style="display: none;">
+                    <div class="setting-info">
+                        <div class="setting-icon">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </div>
+                        <div class="setting-text">
+                            <div class="setting-title">تسجيل الخروج</div>
+                            <div class="setting-desc">الخروج من حسابك الحالي</div>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-left setting-arrow"></i>
+                </div>
+                
+                <div class="setting-item" id="delete-account-btn" style="display: none;">
+                    <div class="setting-info">
+                        <div class="setting-icon">
+                            <i class="fas fa-trash-alt"></i>
+                        </div>
+                        <div class="setting-text">
+                            <div class="setting-title">حذف الحساب</div>
+                            <div class="setting-desc">حذف جميع بياناتك بشكل دائم</div>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-left setting-arrow"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>الرئيسية</span>
+        </a>
+        <a href="create.html" class="nav-item">
+            <i class="fas fa-plus-circle"></i>
+            <span>إنشاء</span>
+        </a>
+        <a href="scan.html" class="nav-item">
+            <i class="fas fa-camera"></i>
+            <span>مسح</span>
+        </a>
+        <a href="myqrs.html" class="nav-item">
+            <i class="fas fa-qrcode"></i>
+            <span>رموزي</span>
+        </a>
+        <a href="settings.html" class="nav-item active">
+            <i class="fas fa-cog"></i>
+            <span>الإعدادات</span>
+        </a>
+    </div>
+    
+    <script src="js/main.js"></script>
+    <script src="js/settings.js"></script>
+</body>
+</html>
