@@ -1506,6 +1506,81 @@ input:checked + .slider:before {
     display: block;
 }
 
+/* أنماط صفحة تسجيل الدخول */
+.login-form, .register-form {
+    padding: 15px 0;
+}
+
+.login-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.login-links a {
+    color: var(--primary-light);
+    text-decoration: none;
+    font-size: 14px;
+    transition: var(--transition);
+}
+
+.login-links a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(40, 41, 54, 0.5);
+    border-radius: var(--radius-sm);
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.user-profile-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 24px;
+    color: white;
+}
+
+.user-profile-info {
+    flex: 1;
+}
+
+.user-profile-name {
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.user-profile-email {
+    font-size: 14px;
+    color: var(--gray);
+}
+
+.backup-options {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.backup-btn {
+    flex: 1;
+    padding: 12px;
+    text-align: center;
+}
+
+
 .form-control.is-invalid {
     border-color: var(--danger);
 }
