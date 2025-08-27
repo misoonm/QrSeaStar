@@ -23,13 +23,13 @@
             <div class="logo-text">عمار الوزير</div>
         </div>
         <div class="user-info">
-            <div class="user-avatar" id="user-avatar">ع</div>
+            <div class="user-avatar" id="user-avatar">?</div>
         </div>
     </header>
     
     <div class="container">
         <!-- صفحة تسجيل الدخول -->
-        <div id="login-page" class="page" style="display: none;">
+        <div id="login-page" class="page">
             <h2 class="section-title"><i class="fas fa-user"></i>تسجيل الدخول</h2>
             
             <div class="card">
@@ -64,7 +64,7 @@
         </div>
         
         <!-- صفحة إنشاء حساب -->
-        <div id="register-page" class="page" style="display: none;">
+        <div id="register-page" class="page">
             <h2 class="section-title"><i class="fas fa-user-plus"></i>إنشاء حساب جديد</h2>
             
             <div class="card">
@@ -115,6 +115,14 @@
         <!-- صفحة الإعدادات الرئيسية -->
         <div id="settings-page" class="page">
             <h2 class="section-title"><i class="fas fa-cog"></i>الإعدادات</h2>
+            
+            <div class="user-profile">
+                <div class="user-profile-avatar" id="user-profile-avatar">ع</div>
+                <div class="user-profile-info">
+                    <div class="user-profile-name" id="user-profile-name">عمار الوزير</div>
+                    <div class="user-profile-email" id="user-profile-email">ammar@example.com</div>
+                </div>
+            </div>
             
             <div class="settings-list">
                 <div class="setting-item">
@@ -176,7 +184,8 @@
                         </div>
                     </div>
                     <label class="toggle-switch">
-                        <input type="checkbox" id="save-history-setting" checked>
+                        <input type="checkbox" id极速赛车开奖直播历史记录
+                        -save-history-setting" checked>
                         <span class="slider"></span>
                     </label>
                 </div>
@@ -186,7 +195,8 @@
                         <div class="setting-icon">
                             <i class="fas fa-database"></i>
                         </div>
-                        <div class="setting-text">
+                        <div class极速赛车开奖直播历史记录
+                        ="setting-text">
                             <div class="setting-title">نسخ احتياطي للبيانات</div>
                             <div class="setting-desc">حفظ أو استعادة بياناتك</div>
                         </div>
@@ -213,7 +223,8 @@
                             <i class="fas fa-question-circle"></i>
                         </div>
                         <div class="setting-text">
-                            <div class="setting-title">المساعدة والدعم</div>
+                            <极速赛车开奖直播历史记录
+                            div class="setting-title">المساعدة والدعم</div>
                             <div class="setting-desc">الأسئلة الشائعة ودليل الاستخدام</div>
                         </div>
                     </div>
@@ -236,7 +247,8 @@
                 <div class="setting-item">
                     <div class="setting-info">
                         <div class="setting-icon">
-                            <i class="fas fa-info-circle"></i>
+                            <i class="fas fa-info-circle"></极速赛车开奖直播历史记录
+                            i>
                         </div>
                         <div class="setting-text">
                             <div class="setting-title">عن التطبيق</div>
@@ -246,7 +258,7 @@
                     <i class="fas fa-chevron-left setting-arrow"></i>
                 </div>
                 
-                <div class="setting-item" id="logout-btn" style="display: none;">
+                <div class="setting-item" id="logout-btn">
                     <div class="setting-info">
                         <div class="setting-icon">
                             <i class="fas fa-sign-out-alt"></i>
@@ -259,7 +271,7 @@
                     <i class="fas fa-chevron-left setting-arrow"></i>
                 </div>
                 
-                <div class="setting-item" id="delete-account-btn" style="display: none;">
+                <div class="setting-item" id="delete-account-btn">
                     <div class="setting-info">
                         <div class="setting-icon">
                             <i class="fas fa-trash-alt"></i>
@@ -298,6 +310,7 @@
         </a>
     </div>
     
+    <script src="js/database.js"></script>
     <script src="js/main.js"></script>
     <script src="js/settings.js"></script>
 </body>
