@@ -3,15 +3,15 @@ let users = [];
 let currentUser = null;
 
 // تهيئة صفحة الإعدادات
-function initSettingsPage() {
-    loadUsersFromStorage();
-    checkLoginStatus();
+async function initSettingsPage() {
+    await loadUsersFromStorage();
+    await checkLoginStatus();
     setupSettingsEventListeners();
     setupLoginEventListeners();
 }
 
 // تحميل المستخدمين من localStorage
-function loadUsersFromStorage() {
+async function loadUsersFromStorage() {
     try {
         const savedUsers = localStorage.getItem('qrAppUsers');
         if (savedUsers) {
@@ -34,14 +34,14 @@ function saveUsersToStorage() {
 }
 
 // التحقق من حالة تسجيل الدخول
-function checkLoginStatus() {
+async function checkLoginStatus() {
     const loggedInUser = localStorage.getItem('qrAppCurrentUser');
     
     if (loggedInUser) {
         try {
             currentUser = JSON.parse(loggedInUser);
             showSettingsPage();
-            updateUserAvatar();
+            updateUserProfile();
         } catch (e) {
             console.error("Error parsing logged in user:", e);
             showLoginPage();
@@ -53,12 +53,27 @@ function checkLoginStatus() {
 
 // تحديث صورة المستخدم
 function updateUserAvatar() {
-    if (currentUser && currentUser.name) {
-        const avatarElement = document.getElementById('user-avatar');
-        if (avatarElement) {
+    const avatarElement = document.getElementById('user-avatar');
+    if (avatarElement) {
+        if (currentUser && currentUser.name) {
             // أخذ الحرف الأول من الاسم
             avatarElement.textContent = currentUser.name.charAt(0);
+        } else {
+            avatarElement.textContent = "?";
         }
+    }
+}
+
+// تحديث الملف الشخصي
+function updateUserProfile() {
+    if (currentUser) {
+        const nameElement = document.getElementById('user-profile-name');
+        const emailElement = document.getElementById('user-profile-email');
+        const avatarElement = document.getElementById('user-profile-avatar');
+        
+        if (nameElement) nameElement.textContent = currentUser.name;
+        if (emailElement) emailElement.textContent = currentUser.email;
+        if (avatarElement) avatarElement.textContent = currentUser.name.charAt(0);
     }
 }
 
@@ -67,10 +82,7 @@ function showLoginPage() {
     document.getElementById('login-page').style.display = 'block';
     document.getElementById('register-page').style.display = 'none';
     document.getElementById('settings-page').style.display = 'none';
-    
-    // إخفاء خيارات تسجيل الخروج وحذف الحساب
-    document.getElementById('logout-btn').style.display = 'none';
-    document.getElementById('delete-account-btn').style.display = 'none';
+    updateUserAvatar();
 }
 
 // عرض صفحة إنشاء حساب
@@ -78,6 +90,7 @@ function showRegisterPage() {
     document.getElementById('login-page').style.display = 'none';
     document.getElementById('register-page').style.display = 'block';
     document.getElementById('settings-page').style.display = 'none';
+    updateUserAvatar();
 }
 
 // عرض صفحة الإعدادات
@@ -85,10 +98,8 @@ function showSettingsPage() {
     document.getElementById('login-page').style.display = 'none';
     document.getElementById('register-page').style.display = 'none';
     document.getElementById('settings-page').style.display = 'block';
-    
-    // إظهار خيارات تسجيل الخروج وحذف الحساب
-    document.getElementById('logout-btn').style.display = 'flex';
-    document.getElementById('delete-account-btn').style.display = 'flex';
+    updateUserAvatar();
+    updateUserProfile();
 }
 
 // إعداد مستمعي الأحداث لتسجيل الدخول
@@ -136,6 +147,7 @@ function loginUser() {
         localStorage.setItem('qrAppCurrentUser', JSON.stringify(user));
         showSettingsPage();
         updateUserAvatar();
+        updateUserProfile();
         showToast("تم تسجيل الدخول بنجاح", "success");
     } else {
         showToast("اسم المستخدم أو كلمة المرور غير صحيحة", "error");
@@ -200,49 +212,72 @@ function registerUser() {
     
     showSettingsPage();
     updateUserAvatar();
+    updateUserProfile();
     showToast("تم إنشاء الحساب بنجاح", "success");
 }
 
 // إعداد مستمعي الأحداث للإعدادات
 function setupSettingsEventListeners() {
     // إعدادات الوضع الداكن/الفاتح
-    document.getElementById('dark-mode-setting').addEventListener('change', function() {
-        app.settings.darkMode = this.checked;
-        applyTheme();
-        saveToLocalStorage();
-        showToast(app.settings.darkMode ? 'تم تفعيل الوضع الفاتح.' : 'تم تفعيل الوضع الداكن.', 'info');
-    });
+    const darkModeToggle = document.getElementById('dark-mode-setting');
+    if (darkModeToggle) {
+        darkModeToggle.checked = app.settings.darkMode;
+        darkModeToggle.addEventListener('change', function() {
+            app.settings.darkMode = this.checked;
+            applyTheme();
+            saveToDatabase();
+            showToast(app.settings.darkMode ? 'تم تفعيل الوضع الفاتح.' : 'تم تفعيل الوضع الداكن.', 'info');
+        });
+    }
     
     // إعدادات الاهتزاز
-    document.getElementById('vibration-setting').addEventListener('change', function() {
-        app.settings.vibration = this.checked;
-        saveToLocalStorage();
-        showToast('تم تحديث إعداد الاهتزاز.', 'info');
-    });
+    const vibrationToggle = document.getElementById('vibration-setting');
+    if (vibrationToggle) {
+        vibrationToggle.checked = app.settings.vibration;
+        vibrationToggle.addEventListener('change', function() {
+            app.settings.vibration = this.checked;
+            saveToDatabase();
+            showToast('تم تحديث إعداد الاهتزاز.', 'info');
+        });
+    }
     
     // إعدادات الفتح التلقائي
-    document.getElementById('auto-open-setting').addEventListener('change', function() {
-        app.settings.autoOpen = this.checked;
-        saveToLocalStorage();
-        showToast('تم تحديث إعداد الفتح التلقائي.', 'info');
-    });
+    const autoOpenToggle = document.getElementById('auto-open-setting');
+    if (autoOpenToggle) {
+        autoOpenToggle.checked = app.settings.autoOpen;
+        autoOpenToggle.addEventListener('change', function() {
+            app.settings.autoOpen = this.checked;
+            saveToDatabase();
+            showToast('تم تحديث إعداد الفتح التلقائي.', 'info');
+        });
+    }
     
     // إعدادات حفظ التاريخ
-    document.getElementById('save-history-setting').addEventListener('change', function() {
-        app.settings.saveHistory = this.checked;
-        saveToLocalStorage();
-        showToast('تم تحديث إعداد حفظ التاريخ.', 'info');
-    });
+    const saveHistoryToggle = document.getElementById('save-history-setting');
+    if (saveHistoryToggle) {
+        saveHistoryToggle.checked = app.settings.saveHistory;
+        saveHistoryToggle.addEventListener('change', function() {
+            app.settings.saveHistory = this.checked;
+            saveToDatabase();
+            showToast('تم تحديث إعداد حفظ التاريخ.', 'info');
+        });
+    }
     
     // تسجيل الخروج
-    document.getElementById('logout-btn').addEventListener('click', function() {
-        logoutUser();
-    });
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function() {
+            logoutUser();
+        });
+    }
     
     // حذف الحساب
-    document.getElementById('delete-account-btn').addEventListener('click', function() {
-        deleteAccount();
-    });
+    const deleteAccountBtn = document.getElementById('delete-account-btn');
+    if (deleteAccountBtn) {
+        deleteAccountBtn.addEventListener('click', function() {
+            deleteAccount();
+        });
+    }
     
     // عناصر الإعدادات الأخرى
     document.querySelectorAll('.setting-item .setting-arrow').forEach(arrow => {
@@ -319,14 +354,9 @@ function deleteAccount() {
 }
 
 // بدء التطبيق عند تحميل الصفحة
-window.addEventListener('DOMContentLoaded', function() {
-    loadFromLocalStorage();
+window.addEventListener('DOMContentLoaded', async function() {
+    await initDatabase();
+    await loadFromDatabase();
     applyTheme();
     initSettingsPage();
-    
-    // تحميل الإعدادات الحالية
-    document.getElementById('dark-mode-setting').checked = app.settings.darkMode;
-    document.getElementById('vibration-setting').checked = app.settings.vibration;
-    document.getElementById('auto-open-setting').checked = app.settings.autoOpen;
-    document.getElementById('save-history-setting').checked = app.settings.saveHistory;
 });
