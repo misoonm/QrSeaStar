@@ -337,3 +337,52 @@ window.addEventListener('beforeunload', function() {
 window.addEventListener('pagehide', function() {
     saveToDatabase();
 });
+
+// الحصول على المستخدم الحالي
+function getCurrentUser() {
+    const userData = localStorage.getItem('qrAppCurrentUser');
+    return userData ? JSON.parse(userData) : null;
+}
+
+// التحقق من وجود مستخدم مسجل دخوله
+function isUserLoggedIn() {
+    return localStorage.getItem('qrAppCurrentUser') !== null;
+}
+
+// تحديث صورة المستخدم في الشريط العلوي
+function updateUserAvatar() {
+    const avatarElement = document.getElementById('user-avatar');
+    if (avatarElement) {
+        const user = getCurrentUser();
+        if (user && user.name) {
+            // أخذ الحرف الأول من الاسم
+            avatarElement.textContent = user.name.charAt(0);
+        } else {
+            avatarElement.textContent = "?";
+        }
+    }
+}
+
+// تحميل البيانات من قاعدة البيانات
+async function loadFromDatabase() {
+    try {
+        // تحميل الإعدادات
+        const settings = await getSettings();
+        if (settings) {
+            app.settings = { ...app.settings, ...settings };
+        }
+        
+        // تحميل رموز QR
+        app.qrCodes = await getAllQRCodes();
+        
+        // تحميل التاريخ
+        app.history = await getAllHistory();
+        
+        // تحديث صورة المستخدم
+        updateUserAvatar();
+    } catch (error) {
+        console.error('Error loading from database:', error);
+        showToast('حدث خطأ في تحميل البيانات', 'error');
+    }
+}
+
