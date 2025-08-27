@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>عمار الوزير | إنشاء ومسح رموز QR</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div class="toast-container"></div>
+
+    <header>
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-qrcode"></i>
+            </div>
+            <div class="logo-text">عمار الوزير</div>
+        </div>
+        <div class="user-info">
+            <div class="user-avatar" id="user-avatar">ع</div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div id="home-page" class="page active">
+            <h2 class="section-title"><i class="fas fa-home"></i>الصفحة الرئيسية</h2>
+            
+            <div class="message info">
+                <i class="fas fa-info-circle"></i>
+                <div class="message-text">مرحباً بك في تطبيق إنشاء ومسح رموز QR</div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">خيارات التطبيق</div>
+                    <div class="card-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                </div>
+                
+                <div class="home-menu">
+                    <a href="create.html" class="home-menu-item">
+                        <div class="home-menu-icon">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                        <div class="home-menu-text">
+                            <div class="home-menu-title">إنشاء رمز QR</div>
+                            <div class="home-menu-desc">إنشاء رمز QR جديد بمحتوى مختلف</div>
+                        </div>
+                        <div class="home-menu-arrow">
+                            <i class="fas fa-chevron-left"></i>
+                        </div>
+                    </a>
+                    
+                    <a href="scan.html" class="home-menu-item">
+                        <div class="home-menu-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <div class="home-menu-text">
+                            <div class="home-menu-title">مسح رمز QR</div>
+                            <div class="home-menu-desc">مسح رموز QR باستخدام الكاميرا</div>
+                        </div>
+                        <div class="home-menu-arrow">
+                            <i class="fas fa-chevron-left"></i>
+                        </div>
+                    </a>
+                    
+                    <a href="myqrs.html" class="home-menu-item">
+                        <div class="home-menu-icon">
+                            <i class="fas fa-qrcode"></i>
+                        </div>
+                        <div class="home-menu-text">
+                            <div class="home-menu-title">رموزي</div>
+                            <div class="home-menu-desc">عرض الرموز التي قمت بإنشائها</div>
+                        </div>
+                        <div class="home-menu-arrow">
+                            <i class="fas fa-chevron-left"></i>
+                        </div>
+                    </a>
+                    
+                    <a href="history.html" class="home-menu-item">
+                        <div class="home-menu-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <div class="home-menu-text">
+                            <div class="home-menu-title">التاريخ والمفضلة</div>
+                            <div class="home-menu-desc">عرض سجل المسح والرموز المفضلة</div>
+                        </div>
+                        <div class="home-menu-arrow">
+                            <i class="fas fa-chevron-left"></i>
+                        </div>
+                    </a>
+                    
+                    <a href="settings.html" class="home-menu-item">
+                        <div class="home-menu-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <div class="home-menu-text">
+                            <div class="home-menu-title">الإعدادات</div>
+                            <div class="home-menu-desc">تخصيص إعدادات التطبيق</div>
+                        </div>
+                        <div class="home-menu-arrow">
+                            <i class="fas fa-chevron-left"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">إحصائيات سريعة</div>
+                    <div class="card-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="total-qrs">0</div>
+                        <div class="stat-label">رموز QR</div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-value" id="total-scans">0</div>
+                        <div class="stat-label">عملية مسح</div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-value" id="favorites-count">0</div>
+                        <div class="stat-label">مفضلة</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item active">
+            <i class="fas fa-home"></i>
+            <span>الرئيسية</span>
+        </a>
+        <a href="create.html" class="nav-item">
+            <i class="fas fa-plus-circle"></i>
+            <span>إنشاء</span>
+        </a>
+        <a href="scan.html" class="nav-item">
+            <i class="fas fa-camera"></i>
+            <span>مسح</span>
+        </a>
+        <a href="myqrs.html" class="nav-item">
+            <i class="fas fa-qrcode"></i>
+            <span>رموزي</span>
+        </a>
+        <a href="settings.html" class="nav-item">
+            <i class="fas fa-cog"></i>
+            <span>الإعدادات</span>
+        </a>
+    </div>
+    
+    <script src="js/database.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/index.js"></script>
+    
+    <script>
+        // تسجيل Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                .then(function(registration) {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                })
+                .catch(function(error) {
+                    console.log('ServiceWorker registration failed: ', error);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
